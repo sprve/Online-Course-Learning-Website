@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sprve.eduservice.mapper.EduTeacherMapper">
+    <update id="updateAudit">
+        update edu_teacher
+        <set>
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="auditOpinion != null and auditOpinion != ''">audit_opinion = #{auditOpinion},</if>
+            gmt_modified = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
