@@ -1,0 +1,1116 @@
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acl_permission`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_permission` (
+  `id` char(19) NOT NULL DEFAULT '' COMMENT '编号',
+  `pid` char(19) NOT NULL DEFAULT '' COMMENT '所属上级',
+  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '名称',
+  `type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '类型(1:菜单,2:按钮)',
+  `permission_value` varchar(50) DEFAULT NULL COMMENT '权限值',
+  `path` varchar(100) DEFAULT NULL COMMENT '访问路径',
+  `component` varchar(100) DEFAULT NULL COMMENT '组件路径',
+  `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
+  `gmt_modified` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_pid` (`pid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_permission`
+--
+
+/*!40000 ALTER TABLE `acl_permission` DISABLE KEYS */;
+INSERT INTO `acl_permission` VALUES ('1','0','主菜单',0,NULL,NULL,NULL,'2019-11-15 17:13:06','2019-11-15 17:13:06'),('1195268474480156673','1','系统管理',1,NULL,'/acl','Layout','2019-11-15 17:13:06','2019-11-18 13:54:25'),('1195268616021139457','1195268474480156673','用户管理',1,NULL,'user/list','/acl/user/list','2019-11-15 17:13:40','2019-11-18 13:53:12'),('1195268788138598401','1195268474480156673','角色管理',1,NULL,'role/list','/acl/role/list','2019-11-15 17:14:21','2019-11-15 17:14:21'),('1195268893830864898','1195268474480156673','菜单管理',1,NULL,'menu/list','/acl/menu/list','2019-11-15 17:14:46','2019-11-15 17:14:46'),('1195269295926206466','1195268616021139457','添加',2,'user.add','user/add','/acl/user/form','2019-11-15 17:16:22','2019-11-15 17:16:22'),('1195269473479483394','1195268616021139457','修改',2,'user.update','user/update/:id','/acl/user/form','2019-11-15 17:17:04','2019-11-15 17:17:04'),('1195269547269873666','1195268616021139457','删除',2,'user.remove','','','2019-11-15 17:17:22','2019-11-15 17:17:22'),('1195269821262782465','1195268788138598401','修改',2,'role.update','role/update/:id','/acl/role/form','2019-11-15 17:18:27','2019-11-15 17:19:53'),('1195270037005197313','1195268788138598401','添加',2,'role.add','role/add','/acl/role/form','2019-11-15 17:19:19','2019-11-18 11:05:42'),('1195270442602782721','1195268788138598401','删除',2,'role.remove','','','2019-11-15 17:20:55','2019-11-15 17:20:55'),('1195270621548568578','1195268788138598401','角色权限',2,'role.acl','role/distribution/:id','/acl/role/roleForm','2019-11-15 17:21:38','2019-11-15 17:21:38'),('1195270810560684034','1195268893830864898','添加',2,'permission.add','','','2019-11-15 17:22:23','2019-11-15 17:22:23'),('1195270862100291586','1195268893830864898','修改',2,'permission.update','','','2019-11-15 17:22:35','2019-11-15 17:22:35'),('1195270887933009922','1195268893830864898','删除',2,'permission.remove','','','2019-11-15 17:22:41','2019-11-15 17:22:41'),('1195349439240048642','1','讲师管理',1,NULL,'/teacher','Layout','2019-11-15 22:34:49','2019-11-15 22:34:49'),('1195349699995734017','1195349439240048642','讲师列表',1,'','table','/edu/teacher/list','2019-11-15 22:35:52','2019-11-15 22:35:52'),('1195349810561781761','1195349439240048642','添加讲师',1,'','save','/edu/teacher/save','2019-11-15 22:36:18','2019-11-15 22:36:18'),('1195349876252971010','1195349810561781761','添加',2,'teacher.add','','','2019-11-15 22:36:34','2019-11-15 22:36:34'),('1195350188359520258','1195349699995734017','删除',2,'teacher.remove','','','2019-11-15 22:37:48','2019-11-15 22:37:48'),('1195350831744782337','1','课程管理',1,NULL,'/course','Layout','2019-11-15 22:40:21','2019-11-15 22:40:21'),('1195350919074385921','1195350831744782337','课程列表',1,NULL,'list','/edu/course/list','2019-11-15 22:40:42','2019-11-15 22:40:42'),('1195351020463296513','1195350831744782337','发布课程',1,NULL,'info','/edu/course/info','2019-11-15 22:41:06','2019-11-15 22:41:06'),('1195351159672246274','1195350919074385921','完成发布',2,'course.publish','publish/:id','/edu/course/publish','2019-11-15 22:41:40','2019-11-15 22:44:01'),('1195351326706208770','1195350919074385921','编辑课程',2,'course.update','info/:id','/edu/course/info','2019-11-15 22:42:19','2019-11-15 22:42:19'),('1195351566221938690','1195350919074385921','编辑课程大纲',2,'chapter.update','chapter/:id','/edu/course/chapter','2019-11-15 22:43:17','2019-11-15 22:43:17'),('1195351862889254913','1','统计分析',1,NULL,'/sta','Layout','2019-11-15 22:44:27','2019-11-15 22:44:27'),('1195351968841568257','1195351862889254913','生成统计',1,NULL,'create','/sta/create','2019-11-15 22:44:53','2019-11-15 22:44:53'),('1195352054917074946','1195351862889254913','统计图表',1,NULL,'show','/sta/show','2019-11-15 22:45:13','2019-11-15 22:45:13'),('1195352127734386690','1195352054917074946','查看',2,'daily.list','','','2019-11-15 22:45:30','2019-11-15 22:45:30'),('1195352215768633346','1195351968841568257','生成',2,'daily.add','','','2019-11-15 22:45:51','2019-11-15 22:45:51'),('1195352547621965825','1','首页管理',1,NULL,'/homepage','Layout','2019-11-15 22:47:11','2019-11-18 10:51:46'),('1195353513549205505','1195352547621965825','头部导航',1,NULL,'header','/homepage/header','2019-11-15 22:51:01','2023-05-13 17:05:55'),('1195354076890370050','1','订单管理',1,NULL,'/order','Layout','2019-11-15 22:53:15','2019-11-15 22:53:15'),('1195354153482555393','1195354076890370050','订单管理',1,NULL,'list','/order/list','2019-11-15 22:53:33','2023-05-18 20:15:10'),('1196301740985311234','1195268616021139457','分配角色',2,'user.assgin','user/role/:id','/acl/user/roleForm','2019-11-18 13:38:56','2019-11-18 13:38:56'),('1549299136216457218','1','用户管理',1,NULL,'/student','Layout','2022-07-19 15:44:33','2023-05-18 20:14:01'),('1549299636219437058','1549299136216457218','用户管理',1,NULL,'list','/student/list','2022-07-19 15:46:33','2023-05-18 20:15:15'),('1549302551977943042','1195352547621965825','后台页面',1,NULL,'admin','/homepage/admin','2022-07-19 15:58:08','2023-05-13 17:05:47'),('1549302806161154049','1195352547621965825','轮播图管理',1,NULL,'banner','/homepage/banner','2022-07-19 15:59:08','2023-05-13 17:05:40'),('1549303265240309762','1195352547621965825','底部链接',1,NULL,'footer','/homepage/footer','2022-07-19 16:00:58','2023-05-13 17:05:34'),('1549310212203110401','1195350831744782337','评论列表',1,NULL,'comment/list','/edu/comment/list','2022-07-19 16:28:34','2023-05-13 16:33:27'),('1552474248130396162','1195349439240048642','讲师审核',1,NULL,'audit','/edu/teacher/audit','2022-07-28 10:01:19','2022-07-28 10:01:19'),('1657305855247114241','1552474248130396162','修改',2,'teacher.update','save/:id','/edu/teacher/save','2023-05-13 16:44:42','2023-05-16 21:58:11'),('1657306188950134785','1549303265240309762','修改',2,'footer.update','','','2023-05-13 16:46:01','2023-05-13 16:46:01'),('1657306337583685633','1549302806161154049','修改',2,'banner.update','','','2023-05-13 16:46:37','2023-05-13 16:46:37'),('1657306509449486338','1549302806161154049','添加',2,'banner.add','','','2023-05-13 16:47:18','2023-05-13 16:47:18'),('1657306566949199874','1549302806161154049','删除',2,'banner.remove','','','2023-05-13 16:47:31','2023-05-13 16:47:31'),('1657306622238515202','1549302551977943042','修改',2,'admin.update','','','2023-05-13 16:47:45','2023-05-13 16:47:45'),('1657306662185066498','1195353513549205505','修改',2,'header.update','','','2023-05-13 16:47:54','2023-05-13 16:47:54'),('1657307143645028354','1549299636219437058','修改',2,'student.update','','','2023-05-13 16:49:49','2023-05-13 16:49:49'),('1657307281520189441','1549299636219437058','添加',2,'student.add','','','2023-05-13 16:50:22','2023-05-13 16:50:22'),('1657307330534825985','1549299636219437058','删除',2,'student.remove','','','2023-05-13 16:50:34','2023-05-13 16:50:34'),('1657308073606111234','1549310212203110401','删除',2,'comment.remove','','','2023-05-13 16:53:31','2023-05-13 16:53:31'),('1657308355752747009','1195351020463296513','开始发布',2,'course.upload','','','2023-05-13 16:54:38','2023-05-13 17:46:08'),('1657318342025666562','1195350831744782337','查看课程分类',1,NULL,'subject/list','/edu/subject/list','2023-05-13 17:34:19','2023-05-13 17:36:05'),('1657318583827292162','1195350831744782337','上传课程分类',1,NULL,'subject/save','/edu/subject/save','2023-05-13 17:35:17','2023-05-13 17:35:56'),('1657318935263830017','1657318583827292162','上传',2,'subject.upload','','','2023-05-13 17:36:40','2023-05-13 17:36:40'),('1657321501934608386','1195350919074385921','删除',2,'course.remove','','','2023-05-13 17:46:52','2023-05-13 17:46:52'),('1657322231961608193','1657318342025666562','添加',2,'subject.add','','','2023-05-13 17:49:46','2023-05-13 17:49:46'),('1657322304007168001','1657318342025666562','删除',2,'subject.remove','','','2023-05-13 17:50:03','2023-05-13 17:50:03');
+/*!40000 ALTER TABLE `acl_permission` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:07
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acl_role`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_role` (
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` varchar(20) NOT NULL DEFAULT '' COMMENT '角色名称',
+  `role_code` varchar(20) DEFAULT NULL COMMENT '角色编码',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_role`
+--
+
+/*!40000 ALTER TABLE `acl_role` DISABLE KEYS */;
+INSERT INTO `acl_role` VALUES (1,'超级管理员','admin','2023-06-12 14:35:14','2023-06-12 14:35:57'),(2,'系统管理员','common','2023-06-12 14:35:18','2023-06-12 10:03:50'),(3,'课程管理员','course','2023-06-12 14:35:41','2023-06-12 14:35:51');
+/*!40000 ALTER TABLE `acl_role` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:07
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acl_role_permission`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_role_permission` (
+  `role_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '角色ID',
+  `permission_id` char(19) NOT NULL DEFAULT '权限id' COMMENT '权限ID',
+  PRIMARY KEY (`role_id`,`permission_id`) USING BTREE,
+  KEY `idx_role_id` (`role_id`) USING BTREE,
+  KEY `idx_permission_id` (`permission_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色权限表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_role_permission`
+--
+
+/*!40000 ALTER TABLE `acl_role_permission` DISABLE KEYS */;
+INSERT INTO `acl_role_permission` VALUES (1,'1'),(1,'1195268474480156673'),(1,'1195268616021139457'),(1,'1195268788138598401'),(1,'1195268893830864898'),(1,'1195269143060602882'),(1,'1195269295926206466'),(1,'1195269473479483394'),(1,'1195269547269873666'),(1,'1195269821262782465'),(1,'1195269903542444034'),(1,'1195270037005197313'),(1,'1195270442602782721'),(1,'1195270621548568578'),(1,'1195270744097742849'),(1,'1195270810560684034'),(1,'1195270862100291586'),(1,'1195270887933009922'),(1,'1195349439240048642'),(1,'1195349699995734017'),(1,'1195349810561781761'),(1,'1195349876252971010'),(1,'1195349979797753857'),(1,'1195350117270261762'),(1,'1195350188359520258'),(1,'1195350299365969922'),(1,'1195350397751758850'),(1,'1195350500512206850'),(1,'1195350612172967938'),(1,'1195350687590748161'),(1,'1195350831744782337'),(1,'1195350919074385921'),(1,'1195351020463296513'),(1,'1195351159672246274'),(1,'1195351326706208770'),(1,'1195351566221938690'),(1,'1195351862889254913'),(1,'1195351968841568257'),(1,'1195352054917074946'),(1,'1195352127734386690'),(1,'1195352215768633346'),(1,'1195352547621965825'),(1,'1195352856645701633'),(1,'1195352909401657346'),(1,'1195353051395624961'),(1,'1195353513549205505'),(1,'1195353672110673921'),(1,'1195354076890370050'),(1,'1195354153482555393'),(1,'1195354315093282817'),(1,'1196301740985311234'),(1,'1549299136216457218'),(1,'1549299636219437058'),(1,'1549302551977943042'),(1,'1549302806161154049'),(1,'1549303265240309762'),(1,'1549310212203110401'),(2,'1'),(2,'1195268474480156673'),(2,'1195268616021139457'),(2,'1195268788138598401'),(2,'1195268893830864898'),(2,'1195269295926206466'),(2,'1195269473479483394'),(2,'1195269547269873666'),(2,'1195269821262782465'),(2,'1195270037005197313'),(2,'1195270442602782721'),(2,'1195270621548568578'),(2,'1195270810560684034'),(2,'1195270862100291586'),(2,'1195270887933009922'),(2,'1196301740985311234'),(3,'1'),(3,'1195350831744782337'),(3,'1195350919074385921'),(3,'1195351020463296513'),(3,'1195351159672246274'),(3,'1195351326706208770'),(3,'1195351566221938690'),(3,'1549310212203110401'),(3,'1657308073606111234'),(3,'1657308355752747009'),(3,'1657318342025666562'),(3,'1657318583827292162'),(3,'1657318935263830017'),(3,'1657321501934608386'),(3,'1657322231961608193'),(3,'1657322304007168001');
+/*!40000 ALTER TABLE `acl_role_permission` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:08
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acl_user`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_user` (
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `username` varchar(20) NOT NULL DEFAULT '' COMMENT '用户号',
+  `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
+  `nick_name` varchar(50) DEFAULT NULL COMMENT '昵称',
+  `phonenumber` varchar(50) DEFAULT NULL COMMENT '手机号',
+  `sex` char(2) DEFAULT NULL COMMENT '性别（0-男 1-女 2-未知）',
+  `email` varchar(60) DEFAULT NULL COMMENT '邮箱',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`user_id`) USING BTREE,
+  UNIQUE KEY `uk_username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='系统用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_user`
+--
+
+/*!40000 ALTER TABLE `acl_user` DISABLE KEYS */;
+INSERT INTO `acl_user` VALUES (1,'admin','58c8cf8ead92a1c4d77f5bc22061074c','超级管理员','13888888888','1','admin@qq.com','','2023-06-12 14:36:13','2023-05-18 18:35:50'),(2,'system','58c8cf8ead92a1c4d77f5bc22061074c','系统管理员','13888888888','0','system@qq.com',NULL,'2023-06-12 14:36:17','2023-06-12 10:04:04'),(3,'course','58c8cf8ead92a1c4d77f5bc22061074c','课程管理员','13888888888','1','course@qq.com',NULL,'2023-06-12 14:36:20','2023-05-18 18:36:02');
+/*!40000 ALTER TABLE `acl_user` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:08
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `acl_user_role`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `acl_user_role` (
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `role_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '角色ID',
+  PRIMARY KEY (`user_id`,`role_id`) USING BTREE,
+  KEY `idx_role_id` (`role_id`) USING BTREE,
+  KEY `idx_user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户角色表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acl_user_role`
+--
+
+/*!40000 ALTER TABLE `acl_user_role` DISABLE KEYS */;
+INSERT INTO `acl_user_role` VALUES (1,1),(2,2),(3,3);
+/*!40000 ALTER TABLE `acl_user_role` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:09
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_banner`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_banner` (
+  `id` char(19) NOT NULL DEFAULT '' COMMENT 'BannerID',
+  `title` varchar(20) DEFAULT '' COMMENT 'Banner标题',
+  `image_url` varchar(500) NOT NULL DEFAULT '' COMMENT '图片地址',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_name` (`title`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='首页banner表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_banner`
+--
+
+/*!40000 ALTER TABLE `edu_banner` DISABLE KEYS */;
+INSERT INTO `edu_banner` VALUES ('1194556896025845762','test1','https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/faac037b36254b41867c43b4d887a8b0banner-2-green.jpg','2023-06-01 18:05:32','2023-05-25 14:06:44'),('1194607458461216769','test2','https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/9c35c5cbd27441efa2ad670eb7054dba126594545.png','2023-06-01 21:26:27','2023-05-25 14:12:20');
+/*!40000 ALTER TABLE `edu_banner` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:09
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_chapter`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_chapter` (
+  `id` char(19) NOT NULL COMMENT '章节ID',
+  `course_id` char(19) NOT NULL COMMENT '课程ID',
+  `title` varchar(50) NOT NULL COMMENT '章节名称',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_course_id` (`course_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='章节表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_chapter`
+--
+
+/*!40000 ALTER TABLE `edu_chapter` DISABLE KEYS */;
+INSERT INTO `edu_chapter` VALUES ('1661596857403277313','1661596196548739074','权衡的艺术',0,'2023-05-25 12:55:36','2023-05-25 12:55:36'),('1661596895516917761','1661596196548739074','框架设计的核心要素',0,'2023-05-25 12:55:46','2023-05-25 12:55:46'),('1661596948985905153','1661596196548739074','Vue.js 3的设计思路',0,'2023-05-25 12:55:58','2023-05-25 12:55:58'),('1661596992090767362','1661596196548739074','响应系统的作用与实现',0,'2023-05-25 12:56:09','2023-05-25 12:56:09'),('1661607749645860865','1661603286730244098',' Java语言概述',0,'2023-05-25 13:38:53','2023-05-25 13:38:53'),('1661607789294616578','1661603286730244098','Java语言基础 ',0,'2023-05-25 13:39:03','2023-05-25 13:39:03'),('1661607875856662529','1661603286730244098','选择与循环',0,'2023-05-25 13:39:23','2023-05-25 13:39:23'),('1661608235086217217','1661603286730244098','Java数组',0,'2023-05-25 13:40:49','2023-05-25 13:40:49'),('1661608763681767426','1661603674724335617','基础知识',0,'2023-05-25 13:42:55','2023-05-25 13:42:55'),('1661608787882901505','1661603674724335617','表达式求值',0,'2023-05-25 13:43:01','2023-05-25 13:43:01'),('1661608837597986817','1661603674724335617','C程序控制结构',0,'2023-05-25 13:43:13','2023-05-25 13:43:13'),('1661609073825382401','1661603674724335617','函数',0,'2023-05-25 13:44:09','2023-05-25 13:44:09'),('1661609482489004034','1661603877334384641','Spring基础',0,'2023-05-25 13:45:46','2023-05-25 13:45:46'),('1661609516794216450','1661603877334384641','Spring中的Bean',0,'2023-05-25 13:45:55','2023-05-25 13:45:55'),('1661609559102160897','1661603877334384641','Spring AOP',0,'2023-05-25 13:46:05','2023-05-25 13:46:05'),('1661609991031586818','1661604131374989314','Linux简介',0,'2023-05-25 13:47:48','2023-05-25 13:49:45'),('1661610028042125313','1661604131374989314','Linux系统的环境搭建',0,'2023-05-25 13:47:57','2023-05-25 13:47:57'),('1661610415734226946','1661604131374989314','首次登录与在线求助man page',0,'2023-05-25 13:49:29','2023-05-25 13:49:50'),('1661610552606949378','1661604131374989314','Linux的文件权限与目录配置',0,'2023-05-25 13:50:02','2023-05-25 13:50:02'),('1667253604117745665','1661604375902912513','第一章',0,'2023-06-10 03:33:30','2023-06-10 03:33:30');
+/*!40000 ALTER TABLE `edu_chapter` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:10
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_comment`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_comment` (
+  `id` char(19) NOT NULL COMMENT '评论ID',
+  `course_id` varchar(19) NOT NULL DEFAULT '' COMMENT '课程ID',
+  `teacher_id` char(19) NOT NULL DEFAULT '' COMMENT '讲师ID',
+  `member_id` varchar(19) NOT NULL DEFAULT '' COMMENT '用户ID',
+  `nickname` varchar(50) DEFAULT NULL COMMENT '用户昵称',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `content` varchar(500) DEFAULT NULL COMMENT '评论内容',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_course_id` (`course_id`) USING BTREE,
+  KEY `idx_teacher_id` (`teacher_id`) USING BTREE,
+  KEY `idx_member_id` (`member_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='评论表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_comment`
+--
+
+/*!40000 ALTER TABLE `edu_comment` DISABLE KEYS */;
+INSERT INTO `edu_comment` VALUES ('1661623239793442818','1661596196548739074','1661589458596495362','1658408998869495810','sprve','https://sprve.oss-cn-beijing.aliyuncs.com/pictures/user.png','课程很好很不错','2023-05-25 14:40:26','2023-05-25 14:40:27'),('1661663731474235393','1661603286730244098','1661590614148218881','1658408998869495810','sprve','https://sprve.oss-cn-beijing.aliyuncs.com/pictures/user.png','课程很好','2023-05-25 17:21:20','2023-05-25 17:21:20');
+/*!40000 ALTER TABLE `edu_comment` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:11
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_course`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_course` (
+  `id` char(19) NOT NULL COMMENT '课程ID',
+  `teacher_id` char(19) NOT NULL COMMENT '讲师ID',
+  `subject_id` char(19) NOT NULL COMMENT '专业ID',
+  `subject_parent_id` char(19) DEFAULT NULL COMMENT '专业父级ID',
+  `title` varchar(50) NOT NULL COMMENT '标题',
+  `price` decimal(10,2) unsigned NOT NULL COMMENT '销售价格，设置为0则可免费观看',
+  `lesson_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '总课时',
+  `cover` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '封面路径',
+  `buy_count` bigint(10) unsigned NOT NULL DEFAULT '0' COMMENT '销售数量',
+  `view_count` bigint(10) unsigned NOT NULL DEFAULT '0' COMMENT '浏览数量',
+  `status` varchar(10) NOT NULL DEFAULT 'Draft' COMMENT '课程状态 Draft未发布 Normal已发布',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_title` (`title`) USING BTREE,
+  KEY `idx_subject_id` (`subject_id`) USING BTREE,
+  KEY `idx_teacher_id` (`teacher_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='课程表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_course`
+--
+
+/*!40000 ALTER TABLE `edu_course` DISABLE KEYS */;
+INSERT INTO `edu_course` VALUES ('1661596196548739074','1661589458596495362','1661588207615967234','1661587744170541058','Vue入门到精通',9.90,24,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/719efaf1d5f240e583b0234b8b5a3220Vue.jpg',4,6,'Normal','2023-05-25 12:52:59','2023-06-12 12:18:06'),('1661603286730244098','1661590614148218881','1661588296409382913','1661587777079050241','Java程序设计',198.00,20,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/33a597d7632b4890864be0ddf001ab60Java.png',2,0,'Normal','2023-05-25 13:21:09','2023-06-12 14:30:49'),('1661603674724335617','1661592974798979074','1661588315430551554','1661587777079050241','C语言基础教程',648.00,48,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/673fbf2f2c6e4bab83fc78847f3d8ef1C语言.jpg',0,0,'Normal','2023-05-25 13:22:42','2023-05-25 13:45:02'),('1661603877334384641','1661592974798979074','1661588559560015874','1661587777079050241','SSM全套',648.00,20,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/8ec12c12c923457488eade9ecd3501f9SSM.jpg',0,0,'Normal','2023-05-25 13:23:30','2023-05-25 13:46:58'),('1661604131374989314','1661593078360539138','1661588396946849794','1661587974555271169','Linux从安装到实战',9.90,48,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/dced598857e54490a3ce61deeb394280Linux.jpg',1,0,'Normal','2023-05-25 13:24:31','2023-05-31 16:27:54'),('1661604375902912513','1661593177966870530','1661588442652180481','1661587974555271169','OpenStack框架深入浅出',9998.00,48,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/5e6e9feb69324444aacfcdeaab9b3ed5OpenStack.jpg',1,1,'Normal','2023-05-25 13:25:29','2023-06-11 13:54:41'),('1661604543893176322','1661593293784186881','1661588523040210946','1661587974555271169','MySQL基础命令',198.00,20,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/9f2c66fb565c429d83d1f5ee92534a4dMysql.jpg',0,0,'Normal','2023-05-25 13:26:09','2023-05-25 13:50:45'),('1661604858717634562','1661593380966989825','1661588370120081409','1661587997049323522','Python高阶教程',20.00,20,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/299992d66f6e494ba195e05c49f0cc63python.png',0,0,'Normal','2023-05-25 13:27:24','2023-05-25 13:50:56'),('1661604989571530753','1661593473971486722','1661588696806031362','1661587997049323522','机器学习',0.00,48,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/51cb6312d2cf4dc7bc68f969448f1341机器学习.jpg',0,0,'Normal','2023-05-25 13:27:55','2023-05-25 13:51:07');
+/*!40000 ALTER TABLE `edu_course` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:11
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_course_description`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_course_description` (
+  `id` char(19) NOT NULL COMMENT '课程ID',
+  `description` text COMMENT '课程简介',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='课程简介表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_course_description`
+--
+
+/*!40000 ALTER TABLE `edu_course_description` DISABLE KEYS */;
+INSERT INTO `edu_course_description` VALUES ('1661596196548739074','<p>本教程适合零基础小白学习，帮你轻松入门Vue。</p>','2023-05-25 12:52:59','2023-06-10 00:38:46'),('1661603286730244098','<p>JAVA基础入门全套视频合集</p>','2023-05-25 13:21:10','2023-05-25 13:29:26'),('1661603674724335617','<p>C语言是世界上最好的语言</p>','2023-05-25 13:22:42','2023-05-25 13:43:57'),('1661603877334384641','<p>资深SSM架构师为您亲身讲解</p>','2023-05-25 13:23:30','2023-05-25 13:32:52'),('1661604131374989314','<p>0基础学习Linux命令，快来一起学习吧</p>','2023-05-25 13:24:31','2023-05-31 16:20:47'),('1661604375902912513','<p>最火的云计算框架非OpenStack莫属</p>','2023-05-25 13:25:29','2023-06-11 13:53:34'),('1661604543893176322','','2023-05-25 13:26:09','2023-05-25 13:26:09'),('1661604858717634562','<p>Python高阶用法大全</p>','2023-05-25 13:27:24','2023-05-25 13:36:03'),('1661604989571530753','<p>让你简单学习AI算法</p>','2023-05-25 13:27:55','2023-05-25 13:36:41');
+/*!40000 ALTER TABLE `edu_course_description` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:12
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_html`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_html` (
+  `id` char(19) NOT NULL COMMENT 'htmlID',
+  `html_name` char(19) NOT NULL COMMENT 'html名字',
+  `html_page` text COMMENT 'html内容',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`,`html_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='动态html表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_html`
+--
+
+/*!40000 ALTER TABLE `edu_html` DISABLE KEYS */;
+INSERT INTO `edu_html` VALUES ('1','header_html','<div style=\"font-size:22px;margin-top:10px\">\n      <a href=\"/\" style=\"margin-right:26px\">首页</a>\n      <a href=\"/course\" style=\"margin-right:26px\"> 课程 </a>\n      <a href=\"/teacher\" style=\"margin-right:26px\"> 名师 </a>\n      <a href=\"/qa\" style=\"margin-right:26px\">问答 </a>\n      <a href=\"/about\" style=\"margin-right:26px\"> 关于 </a>\n</div>','2023-05-10 07:38:30','2023-05-18 10:10:08'),('2','footer_html','<div style=\"text-align:center\">\n     <h4 class=\"hLh30\">\n           <span class=\"fsize18 f-fM c-999\">友情链接</span>\n     </h4>\n      <ul class=\"fsize18 f-fM c-999\">\n           <li>\n              <a href=\"http://www.sprve.com/\" title=\"Sprve\" target=\"_blank\">Sprve官方网站</a>\n           </li>\n      </ul>\n      <h4 class=\"hLh30\">\n           <span class=\"fsize18 f-fM c-999\">在线学习网站(Test...)</span>\n      </h4>\n      <div class=\"clear\"></div>\n</div>\n','2023-05-10 07:38:35','2023-05-10 14:01:58'),('3','admin_html','<img  style=\"border-radius:20px;height:auto;width:1340px\" src=\"https://api.yimian.xyz/img?type=wallpaper\"\\>','2023-05-10 07:38:37','2023-05-10 14:02:08');
+/*!40000 ALTER TABLE `edu_html` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:13
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_order`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_order` (
+  `id` char(19) NOT NULL DEFAULT '' COMMENT '编号',
+  `order_no` varchar(20) NOT NULL DEFAULT '' COMMENT '订单号',
+  `course_id` varchar(19) NOT NULL DEFAULT '' COMMENT '课程ID',
+  `course_title` varchar(100) DEFAULT NULL COMMENT '课程名称',
+  `course_cover` varchar(255) DEFAULT NULL COMMENT '课程封面',
+  `teacher_id` varchar(50) DEFAULT NULL COMMENT '讲师ID',
+  `teacher_name` varchar(20) DEFAULT NULL COMMENT '讲师名称',
+  `member_id` varchar(19) NOT NULL DEFAULT '' COMMENT '用户ID',
+  `nickname` varchar(50) DEFAULT NULL COMMENT '用户昵称',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '用户手机号',
+  `total_fee` decimal(10,2) DEFAULT '0.01' COMMENT '订单金额（分）',
+  `pay_type` tinyint(3) DEFAULT NULL COMMENT '支付类型（1：微信 2：支付宝）',
+  `status` tinyint(3) DEFAULT NULL COMMENT '订单状态（0：未支付 1：已支付）',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `ux_order_no` (`order_no`) USING BTREE,
+  KEY `idx_course_id` (`course_id`) USING BTREE,
+  KEY `idx_member_id` (`member_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='订单表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_order`
+--
+
+/*!40000 ALTER TABLE `edu_order` DISABLE KEYS */;
+INSERT INTO `edu_order` VALUES ('1667257420149993474','20230610034839348','1661596196548739074','Vue入门到精通','https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/719efaf1d5f240e583b0234b8b5a3220Vue.jpg','1661589458596495362','李老师','1658408998869495810','sprve','15841073499',9.90,2,1,'2023-06-10 03:48:40','2023-06-10 03:49:36'),('1668143521484054529','20230612142942221','1661603286730244098','Java程序设计','https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/33a597d7632b4890864be0ddf001ab60Java.png','1661590614148218881','张老师','1658408998869495810','sprve','15841073499',198.00,2,1,'2023-06-12 14:29:43','2023-06-12 14:30:49');
+/*!40000 ALTER TABLE `edu_order` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:13
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_pay_log`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_pay_log` (
+  `id` char(19) NOT NULL DEFAULT '' COMMENT '编号订单号',
+  `order_no` varchar(20) NOT NULL DEFAULT '' COMMENT '订单号',
+  `pay_time` datetime DEFAULT NULL COMMENT '支付完成时间',
+  `total_fee` decimal(10,2) DEFAULT '0.01' COMMENT '支付金额（分）',
+  `transaction_id` varchar(30) DEFAULT NULL COMMENT '交易流水号',
+  `trade_state` char(20) DEFAULT NULL COMMENT '交易状态',
+  `pay_type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '支付类型（1：微信 2：支付宝）',
+  `attr` text COMMENT '其他属性',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_order_no` (`order_no`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='支付日志表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_pay_log`
+--
+
+/*!40000 ALTER TABLE `edu_pay_log` DISABLE KEYS */;
+INSERT INTO `edu_pay_log` VALUES ('1667257654800330754','20230610034839348','2023-06-10 03:49:36',9.90,'2023061022001465170503954638','TRADE_SUCCESS',2,'{\"out_trade_no\":\"20230610034839348\",\"trade_state\":\"TRADE_SUCCESS\",\"trade_no\":\"2023061022001465170503954638\"}','2023-06-10 03:49:36','2023-06-10 03:49:36'),('1668143801202188290','20230612142942221','2023-06-12 14:30:49',198.00,'2023061222001465170503955609','TRADE_SUCCESS',2,'{\"out_trade_no\":\"20230612142942221\",\"trade_state\":\"TRADE_SUCCESS\",\"trade_no\":\"2023061222001465170503955609\"}','2023-06-12 14:30:49','2023-06-12 14:30:49');
+/*!40000 ALTER TABLE `edu_pay_log` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:14
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_statistics_daily`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_statistics_daily` (
+  `id` char(19) NOT NULL COMMENT '编号',
+  `date_calculated` varchar(20) NOT NULL COMMENT '统计日期',
+  `register_num` int(11) NOT NULL DEFAULT '0' COMMENT '注册人数',
+  `video_view_num` int(11) NOT NULL DEFAULT '0' COMMENT '每日视频播放数',
+  `buy_num` int(11) NOT NULL DEFAULT '0' COMMENT '每日购买课程数',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `statistics_day` (`date_calculated`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='网站统计数据表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_statistics_daily`
+--
+
+/*!40000 ALTER TABLE `edu_statistics_daily` DISABLE KEYS */;
+INSERT INTO `edu_statistics_daily` VALUES ('1661632682312704002','2023-05-01',10,264,7,'2023-05-25 15:17:58','2023-05-25 15:17:58'),('1661632786696347649','2023-05-02',9,312,3,'2023-05-25 15:18:23','2023-05-25 15:18:23'),('1661632808682889217','2023-05-03',9,234,2,'2023-05-25 15:18:28','2023-05-25 15:18:28'),('1661632830291943425','2023-05-04',1,159,1,'2023-05-25 15:18:33','2023-05-25 15:18:33'),('1661632844112175105','2023-05-05',2,345,4,'2023-05-25 15:18:36','2023-05-25 15:18:36'),('1661779186490908674','2023-05-25',2,236,0,'2023-05-26 01:00:07','2023-05-26 01:00:07'),('1662141570350948354','2023-05-26',6,321,3,'2023-05-27 01:00:06','2023-05-27 01:00:06'),('1664315918172078082','2023-06-01',0,0,4,'2023-06-02 01:00:11','2023-06-02 01:00:11'),('1664678293496709121','2023-06-02',1,0,0,'2023-06-03 01:00:08','2023-06-03 01:00:08'),('1665040685493698561','2023-06-03',0,0,4,'2023-06-04 01:00:09','2023-06-04 01:00:09'),('1665403064253464578','2023-06-04',0,0,0,'2023-06-05 01:00:07','2023-06-05 01:00:07'),('1665765452274253825','2023-06-05',0,0,4,'2023-06-06 01:00:07','2023-06-06 01:00:07'),('1666127840878051330','2023-06-06',0,0,0,'2023-06-07 01:00:07','2023-06-07 01:00:07'),('1666490232614993921','2023-06-07',0,0,4,'2023-06-08 01:00:08','2023-06-08 01:00:08'),('1666852616848326657','2023-06-08',0,0,0,'2023-06-09 01:00:07','2023-06-09 01:00:07'),('1667939781879599105','2023-06-11',0,0,7,'2023-06-12 01:00:07','2023-06-12 01:00:07');
+/*!40000 ALTER TABLE `edu_statistics_daily` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:14
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_subject`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_subject` (
+  `id` char(19) NOT NULL COMMENT '专业ID',
+  `title` varchar(50) NOT NULL COMMENT '专业名称',
+  `parent_id` char(19) NOT NULL DEFAULT '0' COMMENT '专业父级ID',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_parent_id` (`parent_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='课程专业表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_subject`
+--
+
+/*!40000 ALTER TABLE `edu_subject` DISABLE KEYS */;
+INSERT INTO `edu_subject` VALUES ('1661587744170541058','前端','0','2023-05-25 12:19:24','2023-05-25 12:19:24'),('1661587777079050241','后端','0','2023-05-25 12:19:32','2023-05-25 12:19:32'),('1661587974555271169','系统','0','2023-05-25 12:20:19','2023-05-25 12:20:19'),('1661587997049323522','云计算','0','2023-05-25 12:20:24','2023-05-25 12:20:24'),('1661588207615967234','Vue','1661587744170541058','2023-05-25 12:21:14','2023-05-25 12:21:14'),('1661588296409382913','Java','1661587777079050241','2023-05-25 12:21:35','2023-05-25 12:21:35'),('1661588315430551554','C语言','1661587777079050241','2023-05-25 12:21:40','2023-05-25 12:21:40'),('1661588370120081409','Python','1661587997049323522','2023-05-25 12:21:53','2023-05-25 12:21:53'),('1661588396946849794','Linux','1661587974555271169','2023-05-25 12:21:59','2023-05-25 12:21:59'),('1661588442652180481','OpenStack','1661587974555271169','2023-05-25 12:22:10','2023-05-25 12:22:10'),('1661588523040210946','MySQL','1661587974555271169','2023-05-25 12:22:29','2023-05-25 12:22:29'),('1661588559560015874','SSM','1661587777079050241','2023-05-25 12:22:38','2023-05-25 12:22:38'),('1661588696806031362','AI','1661587997049323522','2023-05-25 12:23:11','2023-05-25 12:23:11'),('1667296901003522050','Docker','1661587997049323522','2023-06-10 06:25:33','2023-06-10 06:25:33');
+/*!40000 ALTER TABLE `edu_subject` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:15
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_teacher`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_teacher` (
+  `id` char(19) NOT NULL COMMENT '讲师ID',
+  `name` varchar(20) NOT NULL COMMENT '讲师姓名',
+  `intro` varchar(500) NOT NULL DEFAULT '' COMMENT '讲师简介',
+  `career` varchar(500) DEFAULT NULL COMMENT '讲师资历',
+  `level` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '头衔 1高级讲师 2首席讲师',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '讲师头像',
+  `phonenumber` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
+  `audit_status` int(2) DEFAULT '0' COMMENT '审核状态（0-待审核 1-审核通过 2-审核不通过）',
+  `audit_opinion` varchar(255) DEFAULT NULL COMMENT '审核意见',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_name` (`name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='讲师表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_teacher`
+--
+
+/*!40000 ALTER TABLE `edu_teacher` DISABLE KEYS */;
+INSERT INTO `edu_teacher` VALUES ('1661589458596495362','李老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/796e3f7ab0f845279e5e7bf71284ae70file.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:26:12','2023-05-25 12:29:45'),('1661590614148218881','张老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/a22cd858ee5a48f5b98a23cb4b425377file.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:30:48','2023-05-25 12:31:01'),('1661592904812822529','王老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/f9aef61f5b8146e483ee08dde4bba129file.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:39:54','2023-05-25 12:39:54'),('1661592974798979074','赵老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/474810b008164cdf8f24da0bab1d5ee3file.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:40:11','2023-05-25 12:40:11'),('1661593078360539138','周老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/ca3f9a2cceec4aef8617c01e1b12022efile.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:40:35','2023-05-25 12:40:35'),('1661593177966870530','杨老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/16317b56ecd44e6d9983c01fea73c1c4file.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:40:59','2023-05-25 12:40:59'),('1661593293784186881','吴老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/f2f74bf0988f4ac49677e8e4fe3ccbeafile.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:41:27','2023-05-25 12:41:27'),('1661593380966989825','纪老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/275aa682457f45be96d560682adb64ebfile.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:41:48','2023-05-25 12:41:48'),('1661593473971486722','闫老师','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/05/25/ac0561fff56441e098a70908c5664a7afile.png','15812345678','15812345678@qq.com',1,NULL,'2023-05-25 12:42:10','2023-05-25 12:42:10'),('1661593512273870849','Test','编程专家，高级架构师。','讲师',1,'https://sprve.oss-cn-beijing.aliyuncs.com/pictures/teacher.png','15812345678','15812345678@qq.com',2,NULL,'2023-05-25 12:42:19','2023-06-12 11:44:26');
+/*!40000 ALTER TABLE `edu_teacher` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:16
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_ucenter`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_ucenter` (
+  `id` char(19) NOT NULL COMMENT '用户ID',
+  `mobile` varchar(11) NOT NULL COMMENT '手机号',
+  `password` varchar(255) NOT NULL COMMENT '密码',
+  `nickname` varchar(50) DEFAULT NULL COMMENT '昵称',
+  `sex` tinyint(2) unsigned DEFAULT NULL COMMENT '性别 1 女，2 男',
+  `age` tinyint(3) unsigned DEFAULT NULL COMMENT '年龄',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_ucenter`
+--
+
+/*!40000 ALTER TABLE `edu_ucenter` DISABLE KEYS */;
+INSERT INTO `edu_ucenter` VALUES ('1658408998869495810','15841073499','e10adc3949ba59abbe56e057f20f883e','sprve',2,19,'https://sprve.oss-cn-beijing.aliyuncs.com/pictures/user.png','2023-05-16 17:48:12','2023-05-31 15:00:15'),('1664527303871135746','15548906872','e10adc3949ba59abbe56e057f20f883e','lucky',1,12,'https://sprve.oss-cn-beijing.aliyuncs.com/2023/06/02/72e08efcf5184b189fee19a1f5f07ac2Test.jpg','2023-06-02 15:00:09','2023-06-12 12:18:49');
+/*!40000 ALTER TABLE `edu_ucenter` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:16
+-- ************************************************************
+--
+-- close fk
+--
+-- skip
+
+
+-- MySQL dump 10.13  Distrib 5.7.35, for Linux (x86_64)
+--
+-- Host: 9.236.36.31    Database: study-system
+-- ------------------------------------------------------
+-- Server version	5.7.18-cynos-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `edu_video`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `edu_video` (
+  `id` char(19) NOT NULL COMMENT '视频ID',
+  `course_id` char(19) NOT NULL COMMENT '课程ID',
+  `chapter_id` char(19) NOT NULL COMMENT '章节ID',
+  `title` varchar(50) NOT NULL COMMENT '节点名称',
+  `video_source_id` varchar(100) DEFAULT NULL COMMENT '云端视频资源ID',
+  `video_name` varchar(100) DEFAULT NULL COMMENT '原始文件名称',
+  `play_count` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '播放次数',
+  `is_free` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否可以试听：0收费 1免费',
+  `sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `gmt_create` datetime NOT NULL COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_course_id` (`course_id`) USING BTREE,
+  KEY `idx_chapter_id` (`chapter_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='课程视频表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edu_video`
+--
+
+/*!40000 ALTER TABLE `edu_video` DISABLE KEYS */;
+INSERT INTO `edu_video` VALUES ('1667784061578133505','1661596196548739074','1661596857403277313','Vue介绍','f1a61dd0082271ee849f5107e0c90102','测试歌曲视频.mp4',0,0,0,'2023-06-11 14:41:21','2023-06-11 14:41:21'),('1667786699224924161','1661596196548739074','1661596895516917761','Vue核心','8bef1350082471ee80260675a0ec0102','测试歌曲视频.mp4',0,0,0,'2023-06-11 14:51:50','2023-06-11 14:52:48');
+/*!40000 ALTER TABLE `edu_video` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-06-12 20:25:17
