@@ -1,4 +1,4 @@
-# 数据结构与算法
+# 在线课程学习网站的设计
 
 ProjectName and Description
 
@@ -15,21 +15,21 @@ ProjectName and Description
 <br />
 
 <p align="center">
-  <!--a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/">
+  <!--a href="https://github.com/loveme-admin/Online-Course-Learning-Website/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a-->
-  <h3 align="center">"数据结构与算法"</h3>
+  <h3 align="center">"在线课程学习网站的设计"</h3>
   <p align="center">
-    数据结构与算法
+    在线课程学习网站的设计
     <br />
-    <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/loveme-admin/Online-Course-Learning-Website"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C">查看Demo</a>
+    <a href="https://github.com/loveme-admin/Online-Course-Learning-Website">查看Demo</a>
     ·
-    <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/issues">报告Bug</a>
+    <a href="https://github.com/loveme-admin/Online-Course-Learning-Website/issues">报告Bug</a>
     ·
-    <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/issues">提出新特性</a>
+    <a href="https://github.com/loveme-admin/Online-Course-Learning-Website/issues">提出新特性</a>
   </p>
 
 </p>
@@ -52,24 +52,23 @@ ProjectName and Description
 
 ###### 开发前的配置要求
 
-1. Visual Studio 2022
+1. Java Idea 2022
 
 ###### **安装步骤**
 
 1. Clone the repo
 
 ```sh
-git clone https://github.com/loveme-admin/Algorithm-and-data-structure-C.git
+git clone https://github.com/loveme-admin/Online-Course-Learning-Website.git
 ```
 
 ### 文件目录说明
 
 ```
 filetree 
-├── Data-Structure
-├── Algorithm
-├── Management-System
-├── Mini-Program
+├── Online-Course-Learning-Website-Admin-VUE
+├── Online-Course-Learning-Website-Web-VUE
+├── Online-Course-Learning-Website-SSM
 └── README.md
 ```
 
@@ -83,7 +82,7 @@ filetree
 
 ### 使用到的框架
 
-- [gcc]
+- [SSM VUE]
 
 ### 贡献者
 
@@ -104,16 +103,16 @@ filetree
 该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
 
 <!-- links -->
-[your-project-path]:loveme-admin/Algorithm-and-data-structure-C
-[contributors-shield]: https://img.shields.io/github/contributors/loveme-admin/Algorithm-and-data-structure-C.svg?style=flat-square
-[contributors-url]: https://github.com/loveme-admin/Algorithm-and-data-structure-C/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/loveme-admin/Algorithm-and-data-structure-C.svg?style=flat-square
-[forks-url]: https://github.com/loveme-admin/Algorithm-and-data-structure-C/network/members
-[stars-shield]: https://img.shields.io/github/stars/loveme-admin/Algorithm-and-data-structure-C.svg?style=flat-square
-[stars-url]: https://github.com/loveme-admin/Algorithm-and-data-structure-C/stargazers
-[issues-shield]: https://img.shields.io/github/issues/loveme-admin/Algorithm-and-data-structure-C.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/loveme-admin/Algorithm-and-data-structure-C.svg
-[license-shield]: https://img.shields.io/github/license/loveme-admin/Algorithm-and-data-structure-C.svg?style=flat-square
-[license-url]: https://github.com/loveme-admin/Algorithm-and-data-structure-C/blob/master/LICENSE.txt
+[your-project-path]:loveme-admin/Online-Course-Learning-Website
+[contributors-shield]: https://img.shields.io/github/contributors/loveme-admin/Online-Course-Learning-Website.svg?style=flat-square
+[contributors-url]: https://github.com/loveme-admin/Online-Course-Learning-Website/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/loveme-admin/Online-Course-Learning-Website.svg?style=flat-square
+[forks-url]: https://github.com/loveme-admin/Online-Course-Learning-Website/network/members
+[stars-shield]: https://img.shields.io/github/stars/loveme-admin/Online-Course-Learning-Website.svg?style=flat-square
+[stars-url]: https://github.com/loveme-admin/Online-Course-Learning-Website/stargazers
+[issues-shield]: https://img.shields.io/github/issues/loveme-admin/Online-Course-Learning-Website.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/loveme-admin/Online-Course-Learning-Website.svg
+[license-shield]: https://img.shields.io/github/license/loveme-admin/Online-Course-Learning-Website.svg?style=flat-square
+[license-url]: https://github.com/loveme-admin/Online-Course-Learning-Website/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/shaojintian
